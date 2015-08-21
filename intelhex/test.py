@@ -422,6 +422,20 @@ Should be:
 Written:
 %s
 """ % (a, b))
+
+    # assertIsInstance available for python 2.7+
+    if 'assertIsInstance' not in dir(unittest.TestCase):
+        # emulate it, based on real code from unittest library but cut several safe checks
+        def assertIsInstance(self, obj, cls, msg=None):
+            """Same as self.assertTrue(isinstance(obj, cls)), with a nicer default message."""
+            if not isinstance(obj, cls):
+                stdMsg = '%s is not an instance of %r' % (repr(obj), cls)
+                if not msg:
+                    self.fail(stdMsg)
+                else:
+                    s = '%s : %s' % (stdMsg, msg)
+                    self.fail(s)
+
 #/class TestIntelHexBase
 
 

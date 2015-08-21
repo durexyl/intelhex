@@ -1,0 +1,3 @@
+*.dsk
+intelhex/__pycache__/
+*.pyc
